@@ -1,0 +1,36 @@
+# Scheduled workflow to discover d6e apps from GitHub repositories
+# tagged with the "d6e-app" topic and auto-update the registry.
+#
+# - Runs every 6 hours and on manual dispatch
+# - Searches GitHub for public repos with topic "d6e-app"
+# - Validates each repo's template.yaml
+# - Merges with verified-apps.yaml for tier assignment
+# - Commits updated registry files if changed
+
+name: Discover Apps
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Discover and update registry
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/discover-apps.mjs

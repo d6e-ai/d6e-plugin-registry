@@ -1,0 +1,8 @@
+# Verified apps list.
+# Apps listed here receive the "verified" badge in the marketplace.
+# To add an app, submit a PR adding the namespace/name pair below.
+# Only the d6e team can merge changes to this file.
+
+apps:
+  - namespace: d6e
+    name: hello-world
