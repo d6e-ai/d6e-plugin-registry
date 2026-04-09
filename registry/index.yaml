@@ -1,0 +1,8 @@
+apps:
+  - namespace: d6e
+    name: hello-world
+    description: A minimal d6e App that demonstrates the template structure.
+    tier: verified
+    category: example
+    icon: sparkles
+    latestVersion: v0.1.0

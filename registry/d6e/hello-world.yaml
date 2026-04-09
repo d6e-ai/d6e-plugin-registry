@@ -1,0 +1,33 @@
+name: hello-world
+namespace: d6e
+description: A minimal d6e App that demonstrates the template structure.
+tier: verified
+repo: https://github.com/d6e-ai/d6e-app-skills
+category: example
+icon: sparkles
+screenshots: []
+versions:
+  - version: v0.1.0
+    releaseDate: "2026-04-09"
+    manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-app-skills/main/examples/hello-world/template.yaml
+    changelog: Initial release
+    resources:
+      stfs: 1
+      files: 0
+      effects: 0
+      workflows: 0
+readme: |
+  ## Hello World
+
+  A minimal d6e App that demonstrates the template structure.
+  Includes a simple JS STF that returns a greeting message.
+
+  ### What's Included
+
+  - **Template Prompt**: A friendly greeting assistant persona
+  - **STF**: `hello` — Returns a personalized greeting message
+
+  ### Usage
+
+  After installing, the AI agent will automatically adopt the greeting assistant persona.
+  Ask it to greet someone and it will use the hello STF.
