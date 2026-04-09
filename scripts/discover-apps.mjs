@@ -89,6 +89,11 @@ function validateTemplate(template, repoFullName) {
     return false;
   }
 
+  if (!/^[a-z0-9][a-z0-9-]*[a-z0-9]$/.test(template.namespace) && !/^[a-z0-9]$/.test(template.namespace)) {
+    console.warn(`  Invalid namespace "${template.namespace}" in ${repoFullName}`);
+    return false;
+  }
+
   if (!/^v\d+\.\d+\.\d+$/.test(template.version)) {
     console.warn(`  Invalid version "${template.version}" in ${repoFullName}`);
     return false;
@@ -140,6 +145,20 @@ async function main() {
   console.log(`Verified apps: ${verifiedApps.size}`);
 
   const repos = await searchD6eAppRepos();
+
+  // Load existing index to merge with, preventing app loss from partial search results
+  let existingIndexApps = [];
+  const existingIndexPath = join(REGISTRY_DIR, 'index.yaml');
+  if (existsSync(existingIndexPath)) {
+    try {
+      const content = readFileSync(existingIndexPath, 'utf-8');
+      const data = yaml.load(content);
+      existingIndexApps = data?.apps ?? [];
+    } catch {
+      // ignore parse errors
+    }
+  }
+
   const discoveredApps = [];
 
   for (const repo of repos) {
@@ -165,7 +184,7 @@ async function main() {
         v.version === template.version
           ? {
               version: template.version,
-              releaseDate: new Date().toISOString().split('T')[0],
+              releaseDate: v.releaseDate || new Date().toISOString().split('T')[0],
               manifestUrl,
               changelog: v.changelog || 'Updated',
               resources: countResources(template)
@@ -213,7 +232,9 @@ async function main() {
     console.log(`  ✓ ${appKey}@${template.version} (${tier})`);
   }
 
-  const indexApps = discoveredApps.map((app) => ({
+  // Merge: start with discovered apps, then add existing apps not found in this run
+  const discoveredKeys = new Set(discoveredApps.map((app) => `${app.namespace}/${app.name}`));
+  const mergedIndexApps = discoveredApps.map((app) => ({
     namespace: app.namespace,
     name: app.name,
     description: app.description,
@@ -222,6 +243,15 @@ async function main() {
     icon: app.icon,
     latestVersion: app.versions[app.versions.length - 1].version
   }));
+
+  for (const existing of existingIndexApps) {
+    const key = `${existing.namespace}/${existing.name}`;
+    if (!discoveredKeys.has(key)) {
+      mergedIndexApps.push(existing);
+    }
+  }
+
+  const indexApps = mergedIndexApps;
 
   indexApps.sort((a, b) => {
     if (a.tier !== b.tier) return a.tier === 'verified' ? -1 : 1;
