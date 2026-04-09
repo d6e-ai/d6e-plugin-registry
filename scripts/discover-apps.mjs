@@ -223,7 +223,15 @@ async function main() {
       readme
     };
 
-    discoveredApps.push(appDetail);
+    const existingIdx = discoveredApps.findIndex(
+      (a) => a.namespace === template.namespace && a.name === template.name
+    );
+    if (existingIdx !== -1) {
+      console.warn(`  Duplicate ${appKey} — overwriting previous entry`);
+      discoveredApps[existingIdx] = appDetail;
+    } else {
+      discoveredApps.push(appDetail);
+    }
 
     const nsDir = join(REGISTRY_DIR, template.namespace);
     mkdirSync(nsDir, { recursive: true });
@@ -243,13 +251,6 @@ async function main() {
     icon: app.icon,
     latestVersion: app.versions[app.versions.length - 1].version
   }));
-
-  for (const existing of existingIndexApps) {
-    const key = `${existing.namespace}/${existing.name}`;
-    if (!discoveredKeys.has(key)) {
-      mergedIndexApps.push(existing);
-    }
-  }
 
   const indexApps = mergedIndexApps;
 
@@ -290,7 +291,7 @@ function guessCategory(template, repo) {
   };
 
   for (const [category, keywords] of Object.entries(categories)) {
-    if (keywords.some((kw) => text.includes(kw))) return category;
+    if (keywords.some((kw) => new RegExp(`\\b${kw}\\b`).test(text))) return category;
   }
 
   return 'other';
