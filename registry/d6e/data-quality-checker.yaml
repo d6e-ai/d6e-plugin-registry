@@ -1,0 +1,51 @@
+name: data-quality-checker
+namespace: d6e
+description: Validates datasets against configurable rules and reports quality issues.
+tier: verified
+repo: https://github.com/d6e-ai/d6e-app-skills
+category: analytics
+icon: shield-check
+screenshots: []
+versions:
+  - version: v1.0.0
+    releaseDate: "2026-04-09"
+    manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-app-skills/main/examples/data-quality-checker/template.yaml
+    changelog: Initial release
+    resources:
+      stfs: 1
+      files: 0
+      effects: 0
+      workflows: 0
+readme: |
+  ## Data Quality Checker
+
+  Validate any dataset against configurable rules. Identifies missing fields,
+  type mismatches, format violations, and out-of-range values.
+
+  ### What's Included
+
+  - **Template Prompt**: Data quality analyst persona
+  - **STF**: `validate-records` — Configurable rule engine supporting 6 check types
+
+  ### Supported Checks
+
+  | Check | Description | Example |
+  |-------|-------------|---------|
+  | `required` | Field must be present and non-empty | `email` must exist |
+  | `type` | Value must match expected type | `age` must be `number` |
+  | `pattern` | Value must match regex | `email` must match `^.+@.+$` |
+  | `min` | Numeric minimum | `price` >= 0 |
+  | `max` | Numeric maximum | `quantity` <= 10000 |
+  | `enum` | Value must be in allowed list | `status` in ["active", "inactive"] |
+
+  ### Use Cases
+
+  - Validate CSV/JSON imports before processing
+  - Audit existing datasets for quality issues
+  - Generate data quality reports with pass rates
+  - Define reusable validation rule sets for recurring data pipelines
+
+  ### Example
+
+  Provide your data and say: "Check these customer records — email should be required,
+  age should be a number between 0 and 150, and status should be active or inactive."

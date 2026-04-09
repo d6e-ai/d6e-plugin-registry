@@ -1,0 +1,55 @@
+name: meeting-notes-summarizer
+namespace: d6e
+description: Extracts action items, decisions, and key points from meeting notes and transcripts.
+tier: verified
+repo: https://github.com/d6e-ai/d6e-app-skills
+category: productivity
+icon: clipboard-list
+screenshots: []
+versions:
+  - version: v1.0.0
+    releaseDate: "2026-04-09"
+    manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-app-skills/main/examples/meeting-notes-summarizer/template.yaml
+    changelog: Initial release
+    resources:
+      stfs: 1
+      files: 0
+      effects: 0
+      workflows: 0
+readme: |
+  ## Meeting Notes Summarizer
+
+  Paste meeting notes or transcripts and get structured output:
+  action items with assignees, key decisions, and participants.
+
+  ### What's Included
+
+  - **Template Prompt**: Meeting analyst persona (English + Japanese support)
+  - **STF**: `extract-action-items` — Parses text for TODO/ACTION/DECISION patterns
+
+  ### Extracted Data
+
+  - **Action Items**: Task description, assignee, deadline, priority (high/medium/low)
+  - **Decisions**: Agreed-upon outcomes
+  - **Participants**: Detected from speaker labels
+  - **Stats**: Word count, line count, unassigned items count
+
+  ### Supported Patterns
+
+  The STF recognizes common meeting note formats:
+  - `TODO: ...` / `ACTION: ...` / `→ ...`
+  - `DECISION: ...` / `AGREED: ...` / `RESOLVED: ...`
+  - Japanese: `アクション：` / `決定：` / `担当：`
+  - Speaker labels: `Alice:` / `田中さん：`
+
+  ### Use Cases
+
+  - Quickly summarize long meeting transcripts
+  - Extract and track action items across meetings
+  - Generate follow-up emails from meeting notes
+  - Identify unassigned tasks that need owners
+
+  ### Example
+
+  Paste your meeting notes and ask: "Summarize this meeting and list all action items."
+  → The AI extracts structured data and presents a clear summary.

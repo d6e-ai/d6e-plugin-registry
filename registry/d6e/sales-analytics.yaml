@@ -1,0 +1,52 @@
+name: sales-analytics
+namespace: d6e
+description: Sales KPI aggregation with target comparison, Slack alerts, and automated reporting workflow.
+tier: verified
+repo: https://github.com/d6e-ai/d6e-app-skills
+category: business
+icon: trending-up
+screenshots: []
+versions:
+  - version: v1.0.0
+    releaseDate: "2026-04-09"
+    manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-app-skills/main/examples/sales-analytics/template.yaml
+    changelog: Initial release
+    resources:
+      stfs: 1
+      files: 1
+      effects: 1
+      workflows: 1
+readme: |
+  ## Sales Analytics
+
+  Track sales performance, aggregate KPIs, compare against targets,
+  and send automated Slack summaries. Full workflow included.
+
+  ### What's Included
+
+  - **Template Prompt**: Sales analyst persona with insight generation
+  - **STF**: `aggregate-sales-kpis` — Groups sales by month/week/product/rep
+  - **File**: `sales-targets.json` — Monthly and product-level revenue targets
+  - **Effect**: `notify-slack` — Posts summaries to Slack (configure webhook URL after install)
+  - **Workflow**: `daily-sales-summary` — Fetch → Aggregate → Notify pipeline
+
+  ### KPIs Computed
+
+  - Total revenue per period
+  - Transaction count
+  - Average deal size
+  - Top product and top rep per period
+  - Target achievement rate
+
+  ### Use Cases
+
+  - Analyze sales data by month, week, product line, or sales rep
+  - Compare actual performance vs. monthly targets
+  - Automate daily/weekly sales reports to Slack
+  - Identify underperforming products or reps
+
+  ### Setup After Install
+
+  1. Update the Slack webhook URL in the `notify-slack` effect
+  2. Edit `sales-targets.json` to match your actual targets
+  3. Configure the workflow's fetch URL to point to your sales API

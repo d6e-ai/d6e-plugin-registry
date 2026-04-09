@@ -5,4 +5,10 @@
 
 apps:
   - namespace: d6e
-    name: hello-world
+    name: accounting-assistant
+  - namespace: d6e
+    name: sales-analytics
+  - namespace: d6e
+    name: data-quality-checker
+  - namespace: d6e
+    name: meeting-notes-summarizer

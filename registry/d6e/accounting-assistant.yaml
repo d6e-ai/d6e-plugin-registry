@@ -1,0 +1,41 @@
+name: accounting-assistant
+namespace: d6e
+description: AI-powered accounting assistant with journal entry validation and chart of accounts.
+tier: verified
+repo: https://github.com/d6e-ai/d6e-app-skills
+category: business
+icon: calculator
+screenshots: []
+versions:
+  - version: v1.0.0
+    releaseDate: "2026-04-09"
+    manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-app-skills/main/examples/accounting-assistant/template.yaml
+    changelog: Initial release
+    resources:
+      stfs: 1
+      files: 1
+      effects: 0
+      workflows: 0
+readme: |
+  ## Accounting Assistant
+
+  AI-powered bookkeeping helper for Japanese businesses. Validates journal entries,
+  suggests account codes, and ensures debit/credit balance.
+
+  ### What's Included
+
+  - **Template Prompt**: Accounting specialist persona with J-GAAP knowledge
+  - **STF**: `validate-journal-entry` — Checks that debit and credit totals match
+  - **File**: `chart-of-accounts.csv` — Standard 勘定科目一覧 with 38 common accounts
+
+  ### Use Cases
+
+  - Validate journal entries before posting
+  - Look up account codes by name
+  - Get help with complex accounting transactions
+  - Generate financial summaries from transaction data
+
+  ### Example
+
+  Ask the AI: "Verify this journal entry: Debit Cash 100,000 / Credit Sales 100,000"
+  → The AI calls the validation STF and confirms the entry is balanced.
