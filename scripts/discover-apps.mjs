@@ -190,7 +190,7 @@ async function main() {
               version: template.version,
               releaseDate: v.releaseDate || new Date().toISOString().split('T')[0],
               manifestUrl,
-              changelog: v.changelog || 'Updated',
+              changelog: v.changelog || { 'en-US': 'Updated', 'ja-JP': '更新' },
               resources: countResources(template)
             }
           : v
@@ -202,7 +202,7 @@ async function main() {
           version: template.version,
           releaseDate: new Date().toISOString().split('T')[0],
           manifestUrl,
-          changelog: existingVersions.length === 0 ? 'Initial release' : 'New version',
+          changelog: existingVersions.length === 0 ? { 'en-US': 'Initial release', 'ja-JP': '初回リリース' } : { 'en-US': 'New version', 'ja-JP': '新バージョン' },
           resources: countResources(template)
         }
       ];
