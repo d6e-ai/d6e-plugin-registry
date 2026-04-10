@@ -208,9 +208,8 @@ async function main() {
       ];
     }
 
-    const descFallback = resolveDescriptionText(template.description);
     const readme =
-      existing?.readme || descFallback || `## ${template.name}\n\n${descFallback}`;
+      existing?.readme || template.description || `## ${template.name}\n\n${resolveDescriptionText(template.description)}`;
 
     const category = existing?.category || guessCategory(template, repo);
     const icon = existing?.icon || 'package';
