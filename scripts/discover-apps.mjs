@@ -5,6 +5,10 @@
 // the registry files. Verified status is determined by
 // verified-apps.yaml in the repository root.
 //
+// Supports i18n: description may be a plain string or a locale-keyed
+// object (e.g. { "en-US": "...", "ja-JP": "..." }). Both formats are
+// preserved as-is in the registry YAML.
+//
 // Limitations:
 // - Only discovers public repositories (GitHub Search API constraint)
 // - Rate-limited to 30 search requests/min with GITHUB_TOKEN
@@ -204,8 +208,9 @@ async function main() {
       ];
     }
 
+    const descFallback = resolveDescriptionText(template.description);
     const readme =
-      existing?.readme || template.description || `## ${template.name}\n\n${template.description}`;
+      existing?.readme || descFallback || `## ${template.name}\n\n${descFallback}`;
 
     const category = existing?.category || guessCategory(template, repo);
     const icon = existing?.icon || 'package';
@@ -279,8 +284,17 @@ async function main() {
   console.log('Done!');
 }
 
+function resolveDescriptionText(description) {
+  if (typeof description === 'string') return description;
+  if (typeof description === 'object' && description !== null) {
+    return Object.values(description).join(' ');
+  }
+  return '';
+}
+
 function guessCategory(template, repo) {
-  const text = `${template.description} ${template.name} ${repo.description || ''}`.toLowerCase();
+  const descText = resolveDescriptionText(template.description);
+  const text = `${descText} ${template.name} ${repo.description || ''}`.toLowerCase();
   const categories = {
     business: ['invoice', 'accounting', 'finance', 'erp', 'crm', 'sales'],
     analytics: ['analytics', 'report', 'dashboard', 'chart', 'data'],

@@ -1,28 +1,36 @@
 apps:
   - namespace: d6e
     name: accounting-assistant
-    description: AI-powered accounting assistant with journal entry validation and chart of accounts.
+    description:
+      en-US: AI-powered accounting assistant with journal entry validation and chart of accounts.
+      ja-JP: 仕訳検証と勘定科目表を備えたAI搭載の会計アシスタント。
     tier: verified
     category: business
     icon: calculator
     latestVersion: v1.0.0
   - namespace: d6e
     name: sales-analytics
-    description: Sales KPI aggregation with target comparison, Slack alerts, and automated reporting workflow.
+    description:
+      en-US: Sales KPI aggregation with target comparison, Slack alerts, and automated reporting workflow.
+      ja-JP: 売上KPI集計、目標比較、Slackアラート、自動レポートワークフロー。
     tier: verified
     category: business
     icon: trending-up
     latestVersion: v1.0.0
   - namespace: d6e
     name: data-quality-checker
-    description: Validates datasets against configurable rules and reports quality issues.
+    description:
+      en-US: Validates datasets against configurable rules and reports quality issues.
+      ja-JP: 設定可能なルールでデータセットを検証し、品質の問題を報告します。
     tier: verified
     category: analytics
     icon: shield-check
     latestVersion: v1.0.0
   - namespace: d6e
     name: meeting-notes-summarizer
-    description: Extracts action items, decisions, and key points from meeting notes and transcripts.
+    description:
+      en-US: Extracts action items, decisions, and key points from meeting notes and transcripts.
+      ja-JP: 議事録やトランスクリプトからアクションアイテム、決定事項、要点を抽出します。
     tier: verified
     category: productivity
     icon: clipboard-list
