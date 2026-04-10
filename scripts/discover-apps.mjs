@@ -256,6 +256,12 @@ async function main() {
     latestVersion: app.versions[app.versions.length - 1].version
   }));
 
+  for (const existing of existingIndexApps) {
+    if (!discoveredKeys.has(`${existing.namespace}/${existing.name}`)) {
+      mergedIndexApps.push(existing);
+    }
+  }
+
   const indexApps = mergedIndexApps;
 
   indexApps.sort((a, b) => {
