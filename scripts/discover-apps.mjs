@@ -208,8 +208,7 @@ async function main() {
       ];
     }
 
-    const readme =
-      existing?.readme || `## ${template.name}\n\n${resolveDescriptionText(template.description)}`;
+    const readme = existing?.readme || buildLocalizedReadme(template);
 
     const category = existing?.category || guessCategory(template, repo);
     const icon = existing?.icon || 'package';
@@ -295,6 +294,21 @@ function resolveDescriptionText(description) {
     return Object.values(description).join(' ');
   }
   return '';
+}
+
+function buildLocalizedReadme(template) {
+  const desc = template.description;
+  if (typeof desc === 'string') {
+    return `## ${template.name}\n\n${desc}`;
+  }
+  if (typeof desc === 'object' && desc !== null) {
+    const result = {};
+    for (const [locale, text] of Object.entries(desc)) {
+      result[locale] = `## ${template.name}\n\n${text}`;
+    }
+    return result;
+  }
+  return `## ${template.name}`;
 }
 
 function guessCategory(template, repo) {
