@@ -9,15 +9,6 @@ apps:
     icon: calculator
     latestVersion: v1.0.0
   - namespace: d6e
-    name: sales-analytics
-    description:
-      en-US: Sales KPI aggregation with target comparison, Slack alerts, and automated reporting workflow.
-      ja-JP: 売上KPI集計、目標比較、Slackアラート、自動レポートワークフロー。
-    tier: verified
-    category: business
-    icon: trending-up
-    latestVersion: v1.0.0
-  - namespace: d6e
     name: data-quality-checker
     description:
       en-US: Validates datasets against configurable rules and reports quality issues.
@@ -34,4 +25,13 @@ apps:
     tier: verified
     category: productivity
     icon: clipboard-list
+    latestVersion: v1.0.0
+  - namespace: d6e
+    name: sales-analytics
+    description:
+      en-US: Sales KPI aggregation with target comparison, Slack alerts, and automated reporting workflow.
+      ja-JP: 売上KPI集計、目標比較、Slackアラート、自動レポートワークフロー。
+    tier: verified
+    category: business
+    icon: trending-up
     latestVersion: v1.0.0
