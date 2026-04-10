@@ -209,7 +209,7 @@ async function main() {
     }
 
     const readme =
-      existing?.readme || template.description || `## ${template.name}\n\n${resolveDescriptionText(template.description)}`;
+      existing?.readme || `## ${template.name}\n\n${resolveDescriptionText(template.description)}`;
 
     const category = existing?.category || guessCategory(template, repo);
     const icon = existing?.icon || 'package';
