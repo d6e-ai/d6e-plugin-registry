@@ -1,6 +1,8 @@
 name: data-quality-checker
 namespace: d6e
-description: Validates datasets against configurable rules and reports quality issues.
+description:
+  en-US: Validates datasets against configurable rules and reports quality issues.
+  ja-JP: 設定可能なルールでデータセットを検証し、品質の問題を報告します。
 tier: verified
 repo: https://github.com/d6e-ai/d6e-app-skills
 category: analytics
@@ -10,42 +12,78 @@ versions:
   - version: v1.0.0
     releaseDate: "2026-04-09"
     manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-app-skills/main/examples/data-quality-checker/template.yaml
-    changelog: Initial release
+    changelog:
+      en-US: Initial release
+      ja-JP: 初回リリース
     resources:
       stfs: 1
       files: 0
       effects: 0
       workflows: 0
-readme: |
-  ## Data Quality Checker
+readme:
+  en-US: |
+    ## Data Quality Checker
 
-  Validate any dataset against configurable rules. Identifies missing fields,
-  type mismatches, format violations, and out-of-range values.
+    Validate any dataset against configurable rules. Identifies missing fields,
+    type mismatches, format violations, and out-of-range values.
 
-  ### What's Included
+    ### What's Included
 
-  - **Template Prompt**: Data quality analyst persona
-  - **STF**: `validate-records` — Configurable rule engine supporting 6 check types
+    - **Template Prompt**: Data quality analyst persona
+    - **STF**: `validate-records` — Configurable rule engine supporting 6 check types
 
-  ### Supported Checks
+    ### Supported Checks
 
-  | Check | Description | Example |
-  |-------|-------------|---------|
-  | `required` | Field must be present and non-empty | `email` must exist |
-  | `type` | Value must match expected type | `age` must be `number` |
-  | `pattern` | Value must match regex | `email` must match `^.+@.+$` |
-  | `min` | Numeric minimum | `price` >= 0 |
-  | `max` | Numeric maximum | `quantity` <= 10000 |
-  | `enum` | Value must be in allowed list | `status` in ["active", "inactive"] |
+    | Check | Description | Example |
+    |-------|-------------|---------|
+    | `required` | Field must be present and non-empty | `email` must exist |
+    | `type` | Value must match expected type | `age` must be `number` |
+    | `pattern` | Value must match regex | `email` must match `^.+@.+$` |
+    | `min` | Numeric minimum | `price` >= 0 |
+    | `max` | Numeric maximum | `quantity` <= 10000 |
+    | `enum` | Value must be in allowed list | `status` in ["active", "inactive"] |
 
-  ### Use Cases
+    ### Use Cases
 
-  - Validate CSV/JSON imports before processing
-  - Audit existing datasets for quality issues
-  - Generate data quality reports with pass rates
-  - Define reusable validation rule sets for recurring data pipelines
+    - Validate CSV/JSON imports before processing
+    - Audit existing datasets for quality issues
+    - Generate data quality reports with pass rates
+    - Define reusable validation rule sets for recurring data pipelines
 
-  ### Example
+    ### Example
 
-  Provide your data and say: "Check these customer records — email should be required,
-  age should be a number between 0 and 150, and status should be active or inactive."
+    Provide your data and say: "Check these customer records — email should be required,
+    age should be a number between 0 and 150, and status should be active or inactive."
+  ja-JP: |
+    ## データ品質チェッカー
+
+    設定可能なルールに基づいてデータセットを検証します。欠損フィールド、
+    型の不一致、フォーマット違反、範囲外の値を特定します。
+
+    ### 含まれるもの
+
+    - **テンプレートプロンプト**: データ品質アナリストペルソナ
+    - **STF**: `validate-records` — 6種類のチェックをサポートする設定可能なルールエンジン
+
+    ### サポートされるチェック
+
+    | チェック | 説明 | 例 |
+    |---------|------|-----|
+    | `required` | フィールドが存在し空でないこと | `email` が必須 |
+    | `type` | 値が期待される型と一致すること | `age` が `number` であること |
+    | `pattern` | 値が正規表現に一致すること | `email` が `^.+@.+$` に一致 |
+    | `min` | 数値の最小値 | `price` >= 0 |
+    | `max` | 数値の最大値 | `quantity` <= 10000 |
+    | `enum` | 値が許可リストに含まれること | `status` が ["active", "inactive"] のいずれか |
+
+    ### ユースケース
+
+    - 処理前のCSV/JSONインポートの検証
+    - 既存データセットの品質監査
+    - 合格率付きデータ品質レポートの生成
+    - 定期的なデータパイプライン向けの再利用可能なバリデーションルール定義
+
+    ### 使用例
+
+    データを提供して「これらの顧客レコードをチェックしてください — emailは必須、
+    ageは0から150の数値、statusはactiveまたはinactiveであるべき」と伝えてください。

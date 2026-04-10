@@ -1,6 +1,8 @@
 name: accounting-assistant
 namespace: d6e
-description: AI-powered accounting assistant with journal entry validation and chart of accounts.
+description:
+  en-US: AI-powered accounting assistant with journal entry validation and chart of accounts.
+  ja-JP: 仕訳検証と勘定科目表を備えたAI搭載の会計アシスタント。
 tier: verified
 repo: https://github.com/d6e-ai/d6e-app-skills
 category: business
@@ -10,32 +12,58 @@ versions:
   - version: v1.0.0
     releaseDate: "2026-04-09"
     manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-app-skills/main/examples/accounting-assistant/template.yaml
-    changelog: Initial release
+    changelog:
+      en-US: Initial release
+      ja-JP: 初回リリース
     resources:
       stfs: 1
       files: 1
       effects: 0
       workflows: 0
-readme: |
-  ## Accounting Assistant
+readme:
+  en-US: |
+    ## Accounting Assistant
 
-  AI-powered bookkeeping helper for Japanese businesses. Validates journal entries,
-  suggests account codes, and ensures debit/credit balance.
+    AI-powered bookkeeping helper for Japanese businesses. Validates journal entries,
+    suggests account codes, and ensures debit/credit balance.
 
-  ### What's Included
+    ### What's Included
 
-  - **Template Prompt**: Accounting specialist persona with J-GAAP knowledge
-  - **STF**: `validate-journal-entry` — Checks that debit and credit totals match
-  - **File**: `chart-of-accounts.csv` — Standard 勘定科目一覧 with 38 common accounts
+    - **Template Prompt**: Accounting specialist persona with J-GAAP knowledge
+    - **STF**: `validate-journal-entry` — Checks that debit and credit totals match
+    - **File**: `chart-of-accounts.csv` — Standard chart of accounts with 38 common accounts
 
-  ### Use Cases
+    ### Use Cases
 
-  - Validate journal entries before posting
-  - Look up account codes by name
-  - Get help with complex accounting transactions
-  - Generate financial summaries from transaction data
+    - Validate journal entries before posting
+    - Look up account codes by name
+    - Get help with complex accounting transactions
+    - Generate financial summaries from transaction data
 
-  ### Example
+    ### Example
 
-  Ask the AI: "Verify this journal entry: Debit Cash 100,000 / Credit Sales 100,000"
-  → The AI calls the validation STF and confirms the entry is balanced.
+    Ask the AI: "Verify this journal entry: Debit Cash 100,000 / Credit Sales 100,000"
+    → The AI calls the validation STF and confirms the entry is balanced.
+  ja-JP: |
+    ## 会計アシスタント
+
+    日本企業向けのAI搭載簿記ヘルパーです。仕訳を検証し、
+    勘定科目コードを提案し、貸借バランスを確認します。
+
+    ### 含まれるもの
+
+    - **テンプレートプロンプト**: J-GAAPの知識を持つ会計専門家ペルソナ
+    - **STF**: `validate-journal-entry` — 借方と貸方の合計が一致するかチェック
+    - **ファイル**: `chart-of-accounts.csv` — 38の一般的な勘定科目を含む勘定科目一覧
+
+    ### ユースケース
+
+    - 転記前の仕訳を検証
+    - 名前で勘定科目コードを検索
+    - 複雑な会計取引のサポートを受ける
+    - 取引データから財務サマリーを生成
+
+    ### 使用例
+
+    AIに聞いてみましょう: 「この仕訳を確認してください: 借方 現金 100,000 / 貸方 売上 100,000」
+    → AIがバリデーションSTFを呼び出し、仕訳のバランスが取れていることを確認します。

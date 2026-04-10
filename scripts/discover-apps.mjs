@@ -5,6 +5,10 @@
 // the registry files. Verified status is determined by
 // verified-apps.yaml in the repository root.
 //
+// Supports i18n: description may be a plain string or a locale-keyed
+// object (e.g. { "en-US": "...", "ja-JP": "..." }). Both formats are
+// preserved as-is in the registry YAML.
+//
 // Limitations:
 // - Only discovers public repositories (GitHub Search API constraint)
 // - Rate-limited to 30 search requests/min with GITHUB_TOKEN
@@ -186,7 +190,7 @@ async function main() {
               version: template.version,
               releaseDate: v.releaseDate || new Date().toISOString().split('T')[0],
               manifestUrl,
-              changelog: v.changelog || 'Updated',
+              changelog: v.changelog || { 'en-US': 'Updated', 'ja-JP': '更新' },
               resources: countResources(template)
             }
           : v
@@ -198,14 +202,13 @@ async function main() {
           version: template.version,
           releaseDate: new Date().toISOString().split('T')[0],
           manifestUrl,
-          changelog: existingVersions.length === 0 ? 'Initial release' : 'New version',
+          changelog: existingVersions.length === 0 ? { 'en-US': 'Initial release', 'ja-JP': '初回リリース' } : { 'en-US': 'New version', 'ja-JP': '新バージョン' },
           resources: countResources(template)
         }
       ];
     }
 
-    const readme =
-      existing?.readme || template.description || `## ${template.name}\n\n${template.description}`;
+    const readme = existing?.readme || buildLocalizedReadme(template);
 
     const category = existing?.category || guessCategory(template, repo);
     const icon = existing?.icon || 'package';
@@ -252,6 +255,12 @@ async function main() {
     latestVersion: app.versions[app.versions.length - 1].version
   }));
 
+  for (const existing of existingIndexApps) {
+    if (!discoveredKeys.has(`${existing.namespace}/${existing.name}`)) {
+      mergedIndexApps.push(existing);
+    }
+  }
+
   const indexApps = mergedIndexApps;
 
   indexApps.sort((a, b) => {
@@ -279,8 +288,32 @@ async function main() {
   console.log('Done!');
 }
 
+function resolveDescriptionText(description) {
+  if (typeof description === 'string') return description;
+  if (typeof description === 'object' && description !== null) {
+    return Object.values(description).join(' ');
+  }
+  return '';
+}
+
+function buildLocalizedReadme(template) {
+  const desc = template.description;
+  if (typeof desc === 'string') {
+    return `## ${template.name}\n\n${desc}`;
+  }
+  if (typeof desc === 'object' && desc !== null) {
+    const result = {};
+    for (const [locale, text] of Object.entries(desc)) {
+      result[locale] = `## ${template.name}\n\n${text}`;
+    }
+    return result;
+  }
+  return `## ${template.name}`;
+}
+
 function guessCategory(template, repo) {
-  const text = `${template.description} ${template.name} ${repo.description || ''}`.toLowerCase();
+  const descText = resolveDescriptionText(template.description);
+  const text = `${descText} ${template.name} ${repo.description || ''}`.toLowerCase();
   const categories = {
     business: ['invoice', 'accounting', 'finance', 'erp', 'crm', 'sales'],
     analytics: ['analytics', 'report', 'dashboard', 'chart', 'data'],

@@ -1,6 +1,8 @@
 name: meeting-notes-summarizer
 namespace: d6e
-description: Extracts action items, decisions, and key points from meeting notes and transcripts.
+description:
+  en-US: Extracts action items, decisions, and key points from meeting notes and transcripts.
+  ja-JP: 議事録やトランスクリプトからアクションアイテム、決定事項、要点を抽出します。
 tier: verified
 repo: https://github.com/d6e-ai/d6e-app-skills
 category: productivity
@@ -10,46 +12,86 @@ versions:
   - version: v1.0.0
     releaseDate: "2026-04-09"
     manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-app-skills/main/examples/meeting-notes-summarizer/template.yaml
-    changelog: Initial release
+    changelog:
+      en-US: Initial release
+      ja-JP: 初回リリース
     resources:
       stfs: 1
       files: 0
       effects: 0
       workflows: 0
-readme: |
-  ## Meeting Notes Summarizer
+readme:
+  en-US: |
+    ## Meeting Notes Summarizer
 
-  Paste meeting notes or transcripts and get structured output:
-  action items with assignees, key decisions, and participants.
+    Paste meeting notes or transcripts and get structured output:
+    action items with assignees, key decisions, and participants.
 
-  ### What's Included
+    ### What's Included
 
-  - **Template Prompt**: Meeting analyst persona (English + Japanese support)
-  - **STF**: `extract-action-items` — Parses text for TODO/ACTION/DECISION patterns
+    - **Template Prompt**: Meeting analyst persona (English + Japanese support)
+    - **STF**: `extract-action-items` — Parses text for TODO/ACTION/DECISION patterns
 
-  ### Extracted Data
+    ### Extracted Data
 
-  - **Action Items**: Task description, assignee, deadline, priority (high/medium/low)
-  - **Decisions**: Agreed-upon outcomes
-  - **Participants**: Detected from speaker labels
-  - **Stats**: Word count, line count, unassigned items count
+    - **Action Items**: Task description, assignee, deadline, priority (high/medium/low)
+    - **Decisions**: Agreed-upon outcomes
+    - **Participants**: Detected from speaker labels
+    - **Stats**: Word count, line count, unassigned items count
 
-  ### Supported Patterns
+    ### Supported Patterns
 
-  The STF recognizes common meeting note formats:
-  - `TODO: ...` / `ACTION: ...` / `→ ...`
-  - `DECISION: ...` / `AGREED: ...` / `RESOLVED: ...`
-  - Japanese: `アクション：` / `決定：` / `担当：`
-  - Speaker labels: `Alice:` / `田中さん：`
+    The STF recognizes common meeting note formats:
+    - `TODO: ...` / `ACTION: ...` / `→ ...`
+    - `DECISION: ...` / `AGREED: ...` / `RESOLVED: ...`
+    - Japanese: `アクション：` / `決定：` / `担当：`
+    - Speaker labels: `Alice:` / `田中さん：`
 
-  ### Use Cases
+    ### Use Cases
 
-  - Quickly summarize long meeting transcripts
-  - Extract and track action items across meetings
-  - Generate follow-up emails from meeting notes
-  - Identify unassigned tasks that need owners
+    - Quickly summarize long meeting transcripts
+    - Extract and track action items across meetings
+    - Generate follow-up emails from meeting notes
+    - Identify unassigned tasks that need owners
 
-  ### Example
+    ### Example
 
-  Paste your meeting notes and ask: "Summarize this meeting and list all action items."
-  → The AI extracts structured data and presents a clear summary.
+    Paste your meeting notes and ask: "Summarize this meeting and list all action items."
+    → The AI extracts structured data and presents a clear summary.
+  ja-JP: |
+    ## 議事録要約ツール
+
+    議事録やトランスクリプトを貼り付けると、構造化された出力が得られます:
+    担当者付きのアクションアイテム、主要な決定事項、参加者リスト。
+
+    ### 含まれるもの
+
+    - **テンプレートプロンプト**: ミーティングアナリストペルソナ（英語・日本語対応）
+    - **STF**: `extract-action-items` — TODO/ACTION/DECISIONパターンのテキスト解析
+
+    ### 抽出されるデータ
+
+    - **アクションアイテム**: タスクの説明、担当者、期限、優先度（高/中/低）
+    - **決定事項**: 合意された結果
+    - **参加者**: 発言者ラベルから検出
+    - **統計**: 単語数、行数、未割り当てアイテム数
+
+    ### 対応パターン
+
+    STFは一般的な議事録フォーマットを認識します:
+    - `TODO: ...` / `ACTION: ...` / `→ ...`
+    - `DECISION: ...` / `AGREED: ...` / `RESOLVED: ...`
+    - 日本語: `アクション：` / `決定：` / `担当：`
+    - 発言者ラベル: `Alice:` / `田中さん：`
+
+    ### ユースケース
+
+    - 長い議事録の素早い要約
+    - ミーティング間でのアクションアイテムの抽出と追跡
+    - 議事録からのフォローアップメールの生成
+    - 担当者が未割り当てのタスクの特定
+
+    ### 使用例
+
+    議事録を貼り付けて「このミーティングを要約し、すべてのアクションアイテムを一覧にしてください」と聞いてみましょう。
+    → AIが構造化されたデータを抽出し、明確なサマリーを提示します。
