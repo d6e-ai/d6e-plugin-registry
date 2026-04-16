@@ -11,7 +11,7 @@ screenshots: []
 versions:
   - version: v0.1.0
     releaseDate: "2026-04-16"
-    manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-valuation/main/template.yaml
+    manifestUrl: http://host.docker.internal:9999/template.yaml
     changelog:
       en-US: Initial release
       ja-JP: 初回リリース
