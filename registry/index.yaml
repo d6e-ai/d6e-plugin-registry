@@ -26,15 +26,6 @@ apps:
     category: productivity
     icon: clipboard-list
     latestVersion: v1.0.0
-  - namespace: d6e-ai
-    name: valuation
-    description:
-      en-US: AI-powered valuation automation for FAS — WACC, EBITDA Multiple, Excel template filling, and report generation.
-      ja-JP: FAS向けAI企業価値評価自動化 — WACC、EBITDAマルチプル、Excelテンプレート入力、レポート生成。
-    tier: unverified
-    category: business
-    icon: calculator
-    latestVersion: v0.1.0
   - namespace: d6e
     name: sales-analytics
     description:
