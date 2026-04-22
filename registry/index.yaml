@@ -18,6 +18,17 @@ apps:
     icon: shield-check
     latestVersion: v1.0.0
   - namespace: d6e
+    name: invoice-jp
+    description:
+      ja-JP: インボイス制度対応の適格請求書・適格簡易請求書・適格返還請求書をPDFとWordで生成・検証するd6e App。
+      en-US: >-
+        Generate and validate Japanese Qualified Invoice, Simplified Qualified Invoice, and Qualified Return Invoice in
+        PDF and DOCX.
+    tier: verified
+    category: business
+    icon: package
+    latestVersion: v1.0.0
+  - namespace: d6e
     name: meeting-notes-summarizer
     description:
       en-US: Extracts action items, decisions, and key points from meeting notes and transcripts.
@@ -34,15 +45,4 @@ apps:
     tier: verified
     category: business
     icon: trending-up
-    latestVersion: v1.0.0
-  - namespace: d6e
-    name: invoice-jp
-    description:
-      ja-JP: インボイス制度対応の適格請求書・適格簡易請求書・適格返還請求書をPDFとWordで生成・検証するd6e App。
-      en-US: >-
-        Generate and validate Japanese Qualified Invoice, Simplified Qualified Invoice, and Qualified Return Invoice in
-        PDF and DOCX.
-    tier: unverified
-    category: business
-    icon: package
     latestVersion: v1.0.0

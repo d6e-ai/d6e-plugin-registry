@@ -5,7 +5,7 @@ description:
   en-US: >-
     Generate and validate Japanese Qualified Invoice, Simplified Qualified Invoice, and Qualified Return Invoice in PDF
     and DOCX.
-tier: unverified
+tier: verified
 repo: https://github.com/d6e-ai/d6e-app-invoice-jp
 category: business
 icon: package
@@ -21,7 +21,7 @@ versions:
       stfs: 3
       files: 3
       effects: 0
-      workflows: 0
+      workflows: 2
 readme:
   ja-JP: |-
     ## invoice-jp
