@@ -1,0 +1,35 @@
+name: invoice-jp
+namespace: d6e
+description:
+  ja-JP: インボイス制度対応の適格請求書・適格簡易請求書・適格返還請求書をPDFとWordで生成・検証するd6e App。
+  en-US: >-
+    Generate and validate Japanese Qualified Invoice, Simplified Qualified Invoice, and Qualified Return Invoice in PDF
+    and DOCX.
+tier: unverified
+repo: https://github.com/d6e-ai/d6e-app-invoice-jp
+category: business
+icon: package
+screenshots: []
+versions:
+  - version: v1.0.0
+    releaseDate: '2026-04-22'
+    manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-app-invoice-jp/v1.0.0/template.yaml
+    changelog:
+      en-US: Initial release
+      ja-JP: 初回リリース
+    resources:
+      stfs: 3
+      files: 3
+      effects: 0
+      workflows: 0
+readme:
+  ja-JP: |-
+    ## invoice-jp
+
+    インボイス制度対応の適格請求書・適格簡易請求書・適格返還請求書をPDFとWordで生成・検証するd6e App。
+  en-US: >-
+    ## invoice-jp
+
+
+    Generate and validate Japanese Qualified Invoice, Simplified Qualified Invoice, and Qualified Return Invoice in PDF
+    and DOCX.
