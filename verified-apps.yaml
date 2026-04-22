@@ -12,3 +12,5 @@ apps:
     name: data-quality-checker
   - namespace: d6e
     name: meeting-notes-summarizer
+  - namespace: d6e
+    name: invoice-jp
