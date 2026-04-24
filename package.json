@@ -1,0 +1,13 @@
+{
+  "name": "d6e-app-registry",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "description": "Registry and discovery pipeline for the d6e App ecosystem.",
+  "scripts": {
+    "discover": "node scripts/discover-apps.mjs"
+  },
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
