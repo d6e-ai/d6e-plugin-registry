@@ -4,14 +4,14 @@ description:
   en-US: Sales KPI aggregation with target comparison, Slack alerts, and automated reporting workflow.
   ja-JP: 売上KPI集計、目標比較、Slackアラート、自動レポートワークフロー。
 tier: verified
-repo: https://github.com/d6e-ai/d6e-app-skills
+repo: https://gitlab.com/cauchye/d6e-ai/d6e-plugin-skills
 category: business
 icon: trending-up
 screenshots: []
 versions:
   - version: v1.0.0
     releaseDate: "2026-04-09"
-    manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-app-skills/main/examples/sales-analytics/template.yaml
+    manifestUrl: https://gitlab.com/cauchye/d6e-ai/d6e-plugin-skills/-/raw/main/examples/sales-analytics/template.yaml
     changelog:
       en-US: Initial release
       ja-JP: 初回リリース

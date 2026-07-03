@@ -1,4 +1,4 @@
-apps:
+plugins:
   - namespace: d6e
     name: accounting-assistant
     description:

@@ -1,9 +1,9 @@
-// Auto-discovery script for d6e apps.
+// Auto-discovery script for d6e plugins.
 //
-// Searches GitHub for repositories with the "d6e-app" topic,
+// Searches GitHub for repositories with the "d6e-plugin" topic,
 // fetches and validates each repo's template.yaml, then updates
 // the registry files. Verified status is determined by
-// verified-apps.yaml in the repository root.
+// verified-plugins.yaml in the repository root.
 //
 // Supports i18n: description may be a plain string or a locale-keyed
 // object (e.g. { "en-US": "...", "ja-JP": "..." }). Both formats are
@@ -20,7 +20,7 @@ import { execSync } from 'child_process';
 import yaml from 'js-yaml';
 
 const REGISTRY_DIR = join(process.cwd(), 'registry');
-const VERIFIED_PATH = join(process.cwd(), 'verified-apps.yaml');
+const VERIFIED_PATH = join(process.cwd(), 'verified-plugins.yaml');
 
 async function githubFetch(url) {
   const response = await fetch(url, {
@@ -44,7 +44,7 @@ async function searchD6eAppRepos() {
   const perPage = 100;
 
   while (true) {
-    const url = `https://api.github.com/search/repositories?q=topic:d6e-app&per_page=${perPage}&page=${page}`;
+    const url = `https://api.github.com/search/repositories?q=topic:d6e-plugin&per_page=${perPage}&page=${page}`;
     const response = await githubFetch(url);
     const data = await response.json();
 
@@ -57,7 +57,7 @@ async function searchD6eAppRepos() {
     await new Promise((resolve) => setTimeout(resolve, 2000));
   }
 
-  console.log(`Found ${repos.length} repositories with topic "d6e-app"`);
+  console.log(`Found ${repos.length} repositories with topic "d6e-plugin"`);
   return repos;
 }
 
@@ -111,9 +111,9 @@ function loadVerifiedApps() {
 
   const content = readFileSync(VERIFIED_PATH, 'utf-8');
   const data = yaml.load(content);
-  if (!data?.apps || !Array.isArray(data.apps)) return new Set();
+  if (!data?.plugins || !Array.isArray(data.plugins)) return new Set();
 
-  return new Set(data.apps.map((a) => `${a.namespace}/${a.name}`));
+  return new Set(data.plugins.map((a) => `${a.namespace}/${a.name}`));
 }
 
 function countResources(template) {
@@ -143,21 +143,21 @@ function loadExistingDetail(namespace, name) {
 }
 
 async function main() {
-  console.log('Starting d6e app discovery...\n');
+  console.log('Starting d6e plugin discovery...\n');
 
   const verifiedApps = loadVerifiedApps();
-  console.log(`Verified apps: ${verifiedApps.size}`);
+  console.log(`Verified plugins: ${verifiedApps.size}`);
 
   const repos = await searchD6eAppRepos();
 
-  // Load existing index to merge with, preventing app loss from partial search results
+  // Load existing index to merge with, preventing plugin loss from partial search results
   let existingIndexApps = [];
   const existingIndexPath = join(REGISTRY_DIR, 'index.yaml');
   if (existsSync(existingIndexPath)) {
     try {
       const content = readFileSync(existingIndexPath, 'utf-8');
       const data = yaml.load(content);
-      existingIndexApps = data?.apps ?? [];
+      existingIndexApps = data?.plugins ?? [];
     } catch {
       // ignore parse errors
     }
@@ -243,16 +243,16 @@ async function main() {
     console.log(`  ✓ ${appKey}@${template.version} (${tier})`);
   }
 
-  // Merge: start with discovered apps, then add existing apps not found in this run
-  const discoveredKeys = new Set(discoveredApps.map((app) => `${app.namespace}/${app.name}`));
-  const mergedIndexApps = discoveredApps.map((app) => ({
-    namespace: app.namespace,
-    name: app.name,
-    description: app.description,
-    tier: app.tier,
-    category: app.category,
-    icon: app.icon,
-    latestVersion: app.versions[app.versions.length - 1].version
+  // Merge: start with discovered plugins, then add existing plugins not found in this run
+  const discoveredKeys = new Set(discoveredApps.map((plugin) => `${plugin.namespace}/${plugin.name}`));
+  const mergedIndexApps = discoveredApps.map((plugin) => ({
+    namespace: plugin.namespace,
+    name: plugin.name,
+    description: plugin.description,
+    tier: plugin.tier,
+    category: plugin.category,
+    icon: plugin.icon,
+    latestVersion: plugin.versions[plugin.versions.length - 1].version
   }));
 
   for (const existing of existingIndexApps) {
@@ -268,9 +268,9 @@ async function main() {
     return `${a.namespace}/${a.name}`.localeCompare(`${b.namespace}/${b.name}`);
   });
 
-  writeFileSync(join(REGISTRY_DIR, 'index.yaml'), yaml.dump({ apps: indexApps }, { lineWidth: 120 }));
+  writeFileSync(join(REGISTRY_DIR, 'index.yaml'), yaml.dump({ plugins: indexApps }, { lineWidth: 120 }));
 
-  console.log(`\nRegistry updated: ${discoveredApps.length} apps`);
+  console.log(`\nRegistry updated: ${discoveredApps.length} plugins`);
 
   const hasChanges = execSync('git diff --name-only', { encoding: 'utf-8' }).trim();
   if (!hasChanges) {
@@ -282,7 +282,7 @@ async function main() {
   execSync('git config user.name "github-actions[bot]"');
   execSync('git config user.email "github-actions[bot]@users.noreply.github.com"');
   execSync('git add registry/');
-  execSync(`git commit -m "Update registry: ${discoveredApps.length} apps discovered"`);
+  execSync(`git commit -m "Update registry: ${discoveredApps.length} plugins discovered"`);
   execSync('git push');
 
   console.log('Done!');

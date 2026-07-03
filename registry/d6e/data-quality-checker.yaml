@@ -4,14 +4,14 @@ description:
   en-US: Validates datasets against configurable rules and reports quality issues.
   ja-JP: 設定可能なルールでデータセットを検証し、品質の問題を報告します。
 tier: verified
-repo: https://github.com/d6e-ai/d6e-app-skills
+repo: https://gitlab.com/cauchye/d6e-ai/d6e-plugin-skills
 category: analytics
 icon: shield-check
 screenshots: []
 versions:
   - version: v1.0.0
     releaseDate: "2026-04-09"
-    manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-app-skills/main/examples/data-quality-checker/template.yaml
+    manifestUrl: https://gitlab.com/cauchye/d6e-ai/d6e-plugin-skills/-/raw/main/examples/data-quality-checker/template.yaml
     changelog:
       en-US: Initial release
       ja-JP: 初回リリース
