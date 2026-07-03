@@ -1,13 +1,13 @@
-# Scheduled workflow to discover d6e apps from GitHub repositories
-# tagged with the "d6e-app" topic and auto-update the registry.
+# Scheduled workflow to discover d6e plugins from GitHub repositories
+# tagged with the "d6e-plugin" topic and auto-update the registry.
 #
 # - Runs every 6 hours and on manual dispatch
-# - Searches GitHub for public repos with topic "d6e-app"
+# - Searches GitHub for public repos with topic "d6e-plugin"
 # - Validates each repo's template.yaml
-# - Merges with verified-apps.yaml for tier assignment
+# - Merges with verified-plugins.yaml for tier assignment
 # - Commits updated registry files if changed
 
-name: Discover Apps
+name: Discover Plugins
 
 on:
   schedule:
@@ -33,4 +33,4 @@ jobs:
       - name: Discover and update registry
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node scripts/discover-apps.mjs
+        run: node scripts/discover-plugins.mjs
