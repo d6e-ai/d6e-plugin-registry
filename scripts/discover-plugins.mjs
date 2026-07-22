@@ -246,15 +246,17 @@ async function main() {
       readme
     };
 
-    const existingIdx = discoveredPlugins.findIndex(
-      (a) => a.namespace === template.namespace && a.name === template.name
+    // Repos are processed in DISCOVERY_TOPICS order, so canonical "d6e-plugin"
+    // repos come before legacy "d6e-app" ones. Keep the first entry so a legacy
+    // duplicate cannot overwrite the canonical repo/manifestUrl.
+    const isDuplicate = discoveredPlugins.some(
+      (plugin) => plugin.namespace === template.namespace && plugin.name === template.name
     );
-    if (existingIdx !== -1) {
-      console.warn(`  Duplicate ${pluginKey} — overwriting previous entry`);
-      discoveredPlugins[existingIdx] = pluginDetail;
-    } else {
-      discoveredPlugins.push(pluginDetail);
+    if (isDuplicate) {
+      console.warn(`  Duplicate ${pluginKey} from ${repo.full_name} — keeping previously discovered entry`);
+      continue;
     }
+    discoveredPlugins.push(pluginDetail);
 
     const nsDir = join(REGISTRY_DIR, template.namespace);
     mkdirSync(nsDir, { recursive: true });
