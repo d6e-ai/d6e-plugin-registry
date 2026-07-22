@@ -1,8 +1,10 @@
 # Scheduled workflow to discover d6e plugins from GitHub repositories
 # tagged with the "d6e-plugin" topic and auto-update the registry.
+# The legacy "d6e-app" topic is also accepted while existing repositories
+# migrate to the Plugin terminology.
 #
 # - Runs every 6 hours and on manual dispatch
-# - Searches GitHub for public repos with topic "d6e-plugin"
+# - Searches GitHub for public repos with topic "d6e-plugin" or legacy "d6e-app"
 # - Validates each repo's template.yaml
 # - Merges with verified-plugins.yaml for tier assignment
 # - Commits updated registry files if changed
@@ -21,11 +23,11 @@ jobs:
   discover:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Install dependencies
         run: npm ci
