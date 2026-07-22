@@ -4,14 +4,14 @@ description:
   en-US: AI-powered accounting assistant with journal entry validation and chart of accounts.
   ja-JP: 仕訳検証と勘定科目表を備えたAI搭載の会計アシスタント。
 tier: verified
-repo: https://gitlab.com/cauchye/d6e-ai/d6e-plugin-skills
+repo: https://github.com/d6e-ai/d6e-plugin-skills
 category: business
 icon: calculator
 screenshots: []
 versions:
   - version: v1.0.0
     releaseDate: "2026-04-09"
-    manifestUrl: https://gitlab.com/cauchye/d6e-ai/d6e-plugin-skills/-/raw/main/examples/accounting-assistant/template.yaml
+    manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-plugin-skills/main/examples/accounting-assistant/template.yaml
     changelog:
       en-US: Initial release
       ja-JP: 初回リリース
