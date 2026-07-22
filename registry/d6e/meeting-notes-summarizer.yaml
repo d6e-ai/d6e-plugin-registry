@@ -4,14 +4,14 @@ description:
   en-US: Extracts action items, decisions, and key points from meeting notes and transcripts.
   ja-JP: 議事録やトランスクリプトからアクションアイテム、決定事項、要点を抽出します。
 tier: verified
-repo: https://gitlab.com/cauchye/d6e-ai/d6e-plugin-skills
+repo: https://github.com/d6e-ai/d6e-plugin-skills
 category: productivity
 icon: clipboard-list
 screenshots: []
 versions:
   - version: v1.0.0
     releaseDate: "2026-04-09"
-    manifestUrl: https://gitlab.com/cauchye/d6e-ai/d6e-plugin-skills/-/raw/main/examples/meeting-notes-summarizer/template.yaml
+    manifestUrl: https://raw.githubusercontent.com/d6e-ai/d6e-plugin-skills/main/examples/meeting-notes-summarizer/template.yaml
     changelog:
       en-US: Initial release
       ja-JP: 初回リリース
