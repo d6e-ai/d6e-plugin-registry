@@ -230,10 +230,13 @@ async function main() {
     const category = existing?.category || guessCategory(template, repo);
     const icon = existing?.icon || 'package';
 
-    const appDetail = {
+    // Keep existing descriptions curated by the registry team. This prevents
+    // a scheduled discovery run from reverting localized terminology when a
+    // source manifest still contains legacy wording.
+    const pluginDetail = {
       name: template.name,
       namespace: template.namespace,
-      description: template.description,
+      description: existing?.description || template.description,
       tier,
       repo: repo.html_url,
       category,
@@ -248,14 +251,14 @@ async function main() {
     );
     if (existingIdx !== -1) {
       console.warn(`  Duplicate ${pluginKey} — overwriting previous entry`);
-      discoveredPlugins[existingIdx] = appDetail;
+      discoveredPlugins[existingIdx] = pluginDetail;
     } else {
-      discoveredPlugins.push(appDetail);
+      discoveredPlugins.push(pluginDetail);
     }
 
     const nsDir = join(REGISTRY_DIR, template.namespace);
     mkdirSync(nsDir, { recursive: true });
-    writeFileSync(join(nsDir, `${template.name}.yaml`), yaml.dump(appDetail, { lineWidth: 120 }));
+    writeFileSync(join(nsDir, `${template.name}.yaml`), yaml.dump(pluginDetail, { lineWidth: 120 }));
 
     console.log(`  ✓ ${pluginKey}@${template.version} (${tier})`);
   }
