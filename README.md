@@ -111,7 +111,7 @@ Both `description`, `changelog`, and `readme` accept either a plain string or a 
 | Tier | Badge | How to get | Review |
 |------|-------|------------|--------|
 | **Verified** | Green | PR adding the plugin to `verified-plugins.yaml` | d6e team reviews |
-| **Unverified** | Yellow | `d6e-plugin` topic + valid manifest | Automatic schema validation |
+| **Unverified** | Yellow | `d6e-plugin` topic + valid manifest (legacy `d6e-app` accepted during migration) | Automatic schema validation |
 
 ## Related Repositories
 
