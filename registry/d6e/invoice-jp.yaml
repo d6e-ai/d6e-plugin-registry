@@ -1,7 +1,7 @@
 name: invoice-jp
 namespace: d6e
 description:
-  ja-JP: インボイス制度対応の適格請求書・適格簡易請求書・適格返還請求書をPDFとWordで生成・検証するd6e Plugin。
+  ja-JP: インボイス制度対応の適格請求書・適格簡易請求書・適格返還請求書をPDFとWordで生成・検証するd6e App。
   en-US: >-
     Generate and validate Japanese Qualified Invoice, Simplified Qualified Invoice, and Qualified Return Invoice in PDF
     and DOCX.
