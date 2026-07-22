@@ -13,7 +13,7 @@ d6e-plugin-registry (this repo)
 │   └── {namespace}/{name}.yaml    Per-plugin detail
 ├── verified-plugins.yaml          Manually curated verified list (PR only)
 └── scripts/
-    └── discover-plugins.mjs       Legacy discovery script (currently unused)
+    └── discover-plugins.mjs       Scheduled GitHub topic discovery
 ```
 
 ## Public URLs
@@ -32,24 +32,27 @@ Self-hosted d6e instances read the marketplace API by default (`MARKETPLACE_REGI
 
 ## How to List a Plugin
 
-> **Note:** The former GitHub-topic-based auto-discovery pipeline is currently
-> unavailable. Marketplace listing is done manually via PRs to this repository.
-> For development and testing you do not need a listing at all — use the
-> **Install from URL** feature on the workspace's Plugins page instead.
+Public GitHub repositories with the `d6e-plugin` topic are scanned every six
+hours by the **Discover Plugins** GitHub Action. Repositories that still use
+the legacy `d6e-app` topic are also accepted during the terminology migration.
+Plugins with a valid root `template.yaml` are registered automatically as
+**unverified**. For development and testing you do not need a listing at all —
+use the **Install from URL** feature on the workspace's Plugins page instead.
 
-1. Host your plugin repository (with a valid `template.yaml`) somewhere the
-   installing d6e instance can reach — a public GitLab/GitHub repo, or a private
-   one (installs then require an access token).
-2. Submit a PR to this repository that adds:
-   - an entry to `registry/index.yaml` under the `plugins:` key, and
-   - a detail file `registry/{namespace}/{name}.yaml` (see format below).
-3. The d6e team reviews and merges the PR. The plugin appears in the
-   marketplace and on every instance's Plugins page after the caches expire
-   (about 5 minutes).
+1. Host your plugin in a public GitHub repository with a valid `template.yaml`
+   at the repository root.
+2. Add the `d6e-plugin` topic to the repository (the legacy `d6e-app` topic is
+   supported for existing repositories).
+3. Wait for the next scheduled run, or dispatch **Discover Plugins** manually.
+   The plugin appears after the registry and marketplace caches expire (about
+   5 minutes after the registry update).
+
+For private/GitLab repositories, or when you need to supply curated metadata,
+submit a pull request that adds the detail and index entries described below.
 
 ### Verified Plugins
 
-Verified plugins receive a green badge and are listed first. To request verification, include your plugin in `verified-plugins.yaml` in the same PR:
+Verified plugins receive a green badge and are listed first. To request verification, include your plugin in `verified-plugins.yaml` in the same pull request:
 
 ```yaml
 plugins:
@@ -61,7 +64,7 @@ The d6e team reviews the plugin contents (see the security guidelines in [d6e-pl
 
 ### Removing a Plugin
 
-Submit a PR removing the entry from `registry/index.yaml` (and the detail file, and `verified-plugins.yaml` if listed).
+Submit a pull request removing the entry from `registry/index.yaml` (and the detail file, and `verified-plugins.yaml` if listed).
 
 ## Registry Format
 
@@ -85,13 +88,13 @@ name: my-plugin
 namespace: my-org
 description: Short description
 tier: unverified
-repo: https://gitlab.com/my-org/d6e-plugin-my-plugin
+repo: https://github.com/my-org/d6e-plugin-my-plugin
 category: business
 icon: package
 versions:
   - version: v1.0.0
     releaseDate: "2026-04-09"
-    manifestUrl: https://gitlab.com/my-org/d6e-plugin-my-plugin/-/raw/v1.0.0/template.yaml
+    manifestUrl: https://raw.githubusercontent.com/my-org/d6e-plugin-my-plugin/v1.0.0/template.yaml
     changelog: Initial release
     resources:
       stfs: 1
@@ -108,7 +111,7 @@ Both `description`, `changelog`, and `readme` accept either a plain string or a 
 | Tier | Badge | How to get | Review |
 |------|-------|------------|--------|
 | **Verified** | Green | PR adding the plugin to `verified-plugins.yaml` | d6e team reviews |
-| **Unverified** | Yellow | PR adding the plugin to `registry/` | Schema validation only |
+| **Unverified** | Yellow | `d6e-plugin` topic + valid manifest (legacy `d6e-app` accepted during migration) | Automatic schema validation |
 
 ## Related Repositories
 

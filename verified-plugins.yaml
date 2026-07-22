@@ -1,6 +1,6 @@
 # Verified plugins list.
 # Plugins listed here receive the "verified" badge in the marketplace.
-# To add a plugin, submit a PR adding the namespace/name pair below.
+# To add a plugin, submit a pull request adding the namespace/name pair below.
 # Only the d6e team can merge changes to this file.
 
 plugins:
