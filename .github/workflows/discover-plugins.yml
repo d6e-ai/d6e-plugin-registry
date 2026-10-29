@@ -1,19 +1,13 @@
-# Scheduled workflow to discover d6e plugins from GitHub repositories
-# tagged with the "d6e-plugin" topic and auto-update the registry.
-# The legacy "d6e-app" topic is also accepted while existing repositories
-# migrate to the Plugin terminology.
+# Discover d6e plugins from GitHub repositories tagged "d6e-plugin"
+# (the legacy "d6e-app" topic is still accepted) and update the registry.
 #
-# - Runs every 6 hours and on manual dispatch
-# - Searches GitHub for public repos with topic "d6e-plugin" or legacy "d6e-app"
-# - Validates each repo's template.yaml
-# - Merges with verified-plugins.yaml for tier assignment
-# - Commits updated registry files if changed
-
+# Manual only. A six-hour schedule kept spending Actions minutes while the
+# registry was idle. Start it by hand:
+#
+#   gh workflow run discover-plugins.yml --ref <branch>
 name: Discover Plugins
 
 on:
-  schedule:
-    - cron: '0 */6 * * *'
   workflow_dispatch:
 
 permissions:
